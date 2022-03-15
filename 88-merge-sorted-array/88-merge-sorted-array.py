@@ -4,11 +4,28 @@ class Solution:
         Do not return anything, modify nums1 in-place instead.
         
         """
-        x=m+1
-        total = m+n
-        y=0
-        for i in range(n):
-            nums1[m+i]= (nums2[i])
+        i = m-1;
+        j = n-1;
+        k = (m+n-1);
+        while(i>=0 and j>=0):
+            if(nums1[i]>nums2[j]):
+                nums1[k]=nums1[i];
+                k-=1
+                i-=1
+            else:
+                nums1[k]=nums2[j];
+                k-=1
+                j-=1
             
-        nums1.sort()
+        
+        while(i>=0):
+            nums1[k]=nums1[i];
+            k-=1
+            i-=1
+        
+        while(j>=0):
+            nums1[k]=nums2[j];
+            k-=1
+            j-=1
+        
         
