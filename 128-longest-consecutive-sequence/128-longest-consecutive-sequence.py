@@ -1,15 +1,23 @@
 class Solution:
     def longestConsecutive(self, nums: List[int]) -> int:
-        numset = set(nums)
-        #print(numset)
-        longest = 0
-        for n in nums:
-            if (n-1) not in numset:
-                length = 0
-                while(length+n) in numset:
-                    length+=1
-                    
-                longest = max(longest, length)
+        hashset = set(nums)
+        visited = set()
+        ans = 0
+        
+        for num in nums:
+            if num-1 in hashset:
+                continue
                 
-        return longest
+            if num-1 in visited:
+                continue
+                
+            currentlen = 0
+            visited.add(num)
+            while num+currentlen in hashset:
+                currentlen+=1
+                
+            
+            ans = max(ans, currentlen)
+            
+        return ans
         
