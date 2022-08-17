@@ -6,19 +6,31 @@
 #         self.right = right
 class Solution:
     def bstFromPreorder(self, preorder: List[int]) -> Optional[TreeNode]:
-        n = len(preorder)
-
-        if n == 0:
-            return None
+        
+        def getans(inorder, preorder):
+            if not inorder or not preorder:
+                return None
+            
+            root=TreeNode(preorder[0])
+            mid = inorder.index(root.val)
+            
+            root.left = getans(inorder[:mid], preorder[1:mid+1])
+            root.right = getans(inorder[mid+1:], preorder[mid+1:])
+            
+            return root
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        inorder = preorder.copy()
+        inorder.sort()
+        #print(inorder)
+        return getans(inorder, preorder)
     
-        l = 1
     
-        while l<n and preorder[l] < preorder[0]:
-            l += 1
-    
-        root = TreeNode(preorder[0])
-        root.left = self.bstFromPreorder(preorder[1:l])
-        root.right = self.bstFromPreorder(preorder[l:n])
-    
-        return root
         
